@@ -1,22 +1,33 @@
 * {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 .game-board {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .game-board-row {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
 }
 
 .game-board-square {
-    height: 150px;
-    width: 150px;
-    outline: 1px solid black;
+  height: 150px;
+  width: 150px;
+  outline: 1px solid black;
+}
+
+.select-X {
+  background-image: url(img/game_X.svg);
+  background-size: 100% auto;
+}
+
+.select-O {
+  background-image: url(img/game_O.svg);
+  background-size: 100% auto;
 }
