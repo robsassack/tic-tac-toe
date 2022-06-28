@@ -40,7 +40,22 @@ const displayController = (() => {
           gameBoard.board[x][y] = "O";
           turn = !turn;
         }
+        gameOver();
       });
     }
   }
 })();
+
+function gameOver() {
+  let isFull = true;
+  for (let x = 0; x < gameBoard.elements.length; x++) {
+    for (let y = 0; y < gameBoard.elements[x].length; y++) {
+      if (gameBoard.board[x][y] === '') {
+        isFull = false;
+      }
+    }
+  }
+  if (isFull === true) {
+    // game board is full
+  }
+}
