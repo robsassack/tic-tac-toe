@@ -21,24 +21,26 @@ const displayController = (() => {
   const playerX = player("X");
   const playerY = player("Y");
 
-  let currentTurn = true; // true == X, false == O
-  gameBoard.elements.forEach((x) => {
-    x.forEach((y) => {
-      y.addEventListener("click", () => {
+  let turn = true; // true == X, false == O
+
+  for (let x = 0; x < gameBoard.elements.length; x++) {
+    for (let y = 0; y < gameBoard.elements[x].length; y++) {
+      let current = gameBoard.elements[x][y];
+      current.addEventListener("click", () => {
         if (
-          y.classList.contains("select-X") ||
-          y.classList.contains("select-O")
+          current.classList.contains("select-X") ||
+          current.classList.contains("select-O")
         ) {
-        } else if (currentTurn) {
-          y.classList.add("select-X");
-          currentTurn = !currentTurn;
+        } else if (turn) {
+          current.classList.add("select-X");
+          gameBoard.board[x][y] = "X";
+          turn = !turn;
         } else {
-          y.classList.add("select-O");
-          currentTurn = !currentTurn;
+          current.classList.add("select-O");
+          gameBoard.board[x][y] = "O";
+          turn = !turn;
         }
       });
-    });
-  });
-  // gameBoard.elements[1][2].classList.add("select-O");
-  // gameBoard.elements[0][2].classList.add("select-X");
+    }
+  }
 })();
