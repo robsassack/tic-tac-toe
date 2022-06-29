@@ -14,40 +14,54 @@ const gameBoard = (() => {
     [boardSel[3], boardSel[4], boardSel[5]],
     [boardSel[6], boardSel[7], boardSel[8]],
   ];
-  return { board, elements };
+  let turn = true; // true == X, false == O
+  return { board, elements, turn };
 })();
 
 const displayController = (() => {
   const playerX = player("X");
   const playerY = player("Y");
 
-  let turn = true; // true == X, false == O
-
   for (let x = 0; x < gameBoard.elements.length; x++) {
     for (let y = 0; y < gameBoard.elements[x].length; y++) {
       let current = gameBoard.elements[x][y];
       current.addEventListener("click", () => {
-        if (
-          current.classList.contains("select-X") ||
-          current.classList.contains("select-O")
-        ) {
-        } else if (turn) {
-          current.classList.add("select-X");
-          gameBoard.board[x][y] = "X";
-          turn = !turn;
-        } else {
-          current.classList.add("select-O");
-          gameBoard.board[x][y] = "O";
-          turn = !turn;
-        }
+        addToBoard(current, x, y);
         let winner = checkWinner(gameBoard.board);
         if (winner) {
           console.log(winner);
+          disableBoard();
         }
       });
     }
   }
 })();
+
+function addToBoard(current, x, y) {
+  if (
+    current.classList.contains("select-X") ||
+    current.classList.contains("select-O")
+  ) {
+  } else if (gameBoard.turn) {
+    current.classList.add("select-X");
+    gameBoard.board[x][y] = "X";
+    gameBoard.turn = !gameBoard.turn;
+  } else {
+    current.classList.add("select-O");
+    gameBoard.board[x][y] = "O";
+    gameBoard.turn = !gameBoard.turn;
+  }
+}
+
+function disableBoard() {
+  // logic here to disable game board
+  for (let x = 0; x < gameBoard.elements.length; x++) {
+    for (let y = 0; y < gameBoard.elements[x].length; y++) {
+      let current = gameBoard.elements[x][y];
+      current.replaceWith(current.cloneNode(true));
+    }
+  }
+}
 
 function checkWinner(board) {
   for (i=0; i<3; i++) {
@@ -76,7 +90,7 @@ function checkWinner(board) {
       return board[1][1];
   }
   if (emptyBoard() === true) {
-    return -1;
+    return -1; // returned if no winner
   }
 }
 
