@@ -1,5 +1,5 @@
-const player = (symbol) => {
-  return { symbol };
+const player = (symbol, name) => {
+  return { symbol, name };
 };
 
 const gameBoard = (() => {
@@ -19,8 +19,8 @@ const gameBoard = (() => {
 })();
 
 const displayController = (() => {
-  const playerX = player("X");
-  const playerY = player("Y");
+  const playerX = player("X", "Player 1");
+  const playerY = player("Y", "Player 2");
 
   for (let x = 0; x < gameBoard.elements.length; x++) {
     for (let y = 0; y < gameBoard.elements[x].length; y++) {
@@ -31,6 +31,13 @@ const displayController = (() => {
         if (winner) {
           console.log(winner);
           disableBoard();
+          let resetButton = document.createElement("button");
+          resetButton.innerText = "New Game";
+          resetButton.classList.add("new-game");
+          document.body.appendChild(resetButton);
+          resetButton.addEventListener("click", () => {
+            // push this to start a new game
+          });
         }
       });
     }
@@ -89,12 +96,12 @@ function checkWinner(board) {
     board[1][1] === board[0][2]){
       return board[1][1];
   }
-  if (emptyBoard() === true) {
+  if (isBoardEmpty() === true) {
     return -1; // returned if no winner
   }
 }
 
-function emptyBoard() {
+function isBoardEmpty() {
   for (let x = 0; x < gameBoard.elements.length; x++) {
     for (let y = 0; y < gameBoard.elements[x].length; y++) {
       if (gameBoard.board[x][y] === '') {
