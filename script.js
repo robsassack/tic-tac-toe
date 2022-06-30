@@ -20,25 +20,27 @@ const gameBoard = (() => {
 
 const displayController = (() => {
   const playerX = player("X", "Player 1");
-  const playerY = player("Y", "Player 2");
+  const playerO = player("O", "Player 2");
 
-  for (let x = 0; x < gameBoard.elements.length; x++) {
-    for (let y = 0; y < gameBoard.elements[x].length; y++) {
+  for (let x=0; x<gameBoard.elements.length; x++){
+    for (let y=0; y<gameBoard.elements[x].length; y++){
       let current = gameBoard.elements[x][y];
-      current.addEventListener("click", () => {
-        addToBoard(current, x, y);
-        let winner = checkWinner(gameBoard.board);
-        if (winner) {
-          console.log(winner);
-          disableBoard();
-          let resetButton = document.createElement("button");
-          resetButton.innerText = "New Game";
-          resetButton.classList.add("new-game");
-          document.body.appendChild(resetButton);
-          resetButton.addEventListener("click", () => {
-            // push this to start a new game
-          });
-        }
+      current.addEventListener('click', logConsole.bind(null, current, x, y));
+    }
+  }
+
+  function logConsole(e, x, y) {
+    addToBoard(e, x, y);
+    let winner = checkWinner(gameBoard.board);
+    if (winner) {
+      console.log(winner);
+      disableBoard();
+      let resetButton = document.createElement("button");
+      resetButton.innerText = "New Game";
+      resetButton.classList.add("new-game");
+      document.body.appendChild(resetButton);
+      resetButton.addEventListener("click", () => {
+        return;
       });
     }
   }
