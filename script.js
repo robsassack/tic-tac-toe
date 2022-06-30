@@ -35,16 +35,27 @@ const displayController = (() => {
     if (winner) {
       console.log(winner);
       disableBoard();
-      let resetButton = document.createElement("button");
-      resetButton.innerText = "New Game";
-      resetButton.classList.add("new-game");
-      document.body.appendChild(resetButton);
-      resetButton.addEventListener("click", () => {
-        return;
-      });
     }
   }
+
+  let resetButton = document.querySelector(".new-game");
+  resetButton.addEventListener("click", () => {
+    resetBoard();
+  });
 })();
+
+function resetBoard() {
+  gameBoard.board = [
+    ["", "", ""],
+    ["", "", ""],
+    ["", "", ""],
+  ];
+  const grid = document.querySelectorAll(".game-board-square");
+  grid.forEach((element) => {
+    element.classList.remove("select-X");
+    element.classList.remove("select-O");
+  })
+}
 
 function addToBoard(current, x, y) {
   if (
