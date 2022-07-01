@@ -22,27 +22,38 @@ const displayController = (() => {
   const playerX = player("X", "Player 1");
   const playerO = player("O", "Player 2");
 
-  for (let x=0; x<gameBoard.elements.length; x++){
-    for (let y=0; y<gameBoard.elements[x].length; y++){
-      let current = gameBoard.elements[x][y];
-      current.addEventListener('click', logConsole.bind(null, current, x, y));
-    }
-  }
-
-  function logConsole(e, x, y) {
-    addToBoard(e, x, y);
-    let winner = checkWinner(gameBoard.board);
-    if (winner) {
-      console.log(winner);
-      disableBoard();
-    }
-  }
+  const grid = document.querySelectorAll('.game-board-square');
+  grid.forEach((current) => {
+    current.addEventListener('click', logConsole);
+  });
 
   let resetButton = document.querySelector(".new-game");
   resetButton.addEventListener("click", () => {
     resetBoard();
   });
 })();
+
+function logConsole(e) {
+  let xy = getXY(this);
+  x = xy[0];
+  y = xy[1];
+  addToBoard(this, x, y);
+  let winner = checkWinner(gameBoard.board);
+  if (winner) {
+    console.log(winner);
+    disableBoard();
+  }
+}
+
+function getXY(item) {
+  for (let x = 0; x < gameBoard.elements.length; x++) {
+    for (let y = 0; y < gameBoard.elements[x].length; y++) {
+      if (gameBoard.elements[x][y] === item) {
+        return [x, y];
+      }
+    }
+  }
+}
 
 function resetBoard() {
   gameBoard.board = [
@@ -78,7 +89,7 @@ function disableBoard() {
   for (let x = 0; x < gameBoard.elements.length; x++) {
     for (let y = 0; y < gameBoard.elements[x].length; y++) {
       let current = gameBoard.elements[x][y];
-      current.replaceWith(current.cloneNode(true));
+      current.removeEventListener('click', logConsole);
     }
   }
 }
