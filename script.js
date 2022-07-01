@@ -22,6 +22,10 @@ const displayController = (() => {
   const playerX = player("X", "Player 1");
   const playerO = player("O", "Player 2");
 
+  buttonListeners();
+})();
+
+function buttonListeners() {
   const grid = document.querySelectorAll('.game-board-square');
   grid.forEach((current) => {
     current.addEventListener('click', logConsole);
@@ -30,8 +34,9 @@ const displayController = (() => {
   let resetButton = document.querySelector(".new-game");
   resetButton.addEventListener("click", () => {
     resetBoard();
+    buttonListeners();
   });
-})();
+}
 
 function logConsole(e) {
   let xy = getXY(this);
@@ -66,6 +71,7 @@ function resetBoard() {
     element.classList.remove("select-X");
     element.classList.remove("select-O");
   })
+  gameBoard.turn = true;
 }
 
 function addToBoard(current, x, y) {
