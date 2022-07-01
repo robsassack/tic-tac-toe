@@ -24,10 +24,14 @@
 
 .select-X {
   background-image: url(img/game_X.svg);
-  background-size: 100% auto;
 }
 
 .select-O {
   background-image: url(img/game_O.svg);
+}
+
+.select-X,
+.select-O {
+  background-repeat: no-repeat;
   background-size: 100% auto;
 }
