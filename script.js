@@ -23,20 +23,20 @@ const displayController = (() => {
   const playerO = player("O", "Player 2");
 
   buttonListeners();
+
+  function buttonListeners() {
+    const grid = document.querySelectorAll(".game-board-square");
+    grid.forEach((current) => {
+      current.addEventListener("click", logConsole);
+    });
+
+    let resetButton = document.querySelector(".new-game");
+    resetButton.addEventListener("click", () => {
+      resetBoard();
+      buttonListeners();
+    });
+  }
 })();
-
-function buttonListeners() {
-  const grid = document.querySelectorAll(".game-board-square");
-  grid.forEach((current) => {
-    current.addEventListener("click", logConsole);
-  });
-
-  let resetButton = document.querySelector(".new-game");
-  resetButton.addEventListener("click", () => {
-    resetBoard();
-    buttonListeners();
-  });
-}
 
 function logConsole(e) {
   let xy = getXY(this);
