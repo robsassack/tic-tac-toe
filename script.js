@@ -21,6 +21,7 @@ const gameBoard = (() => {
 const displayController = (() => {
   const playerX = player("X", "Player 1");
   const playerO = player("O", "Player 2");
+  const winnerText = document.querySelector('.winner-text');
 
   buttonListeners();
 
@@ -32,6 +33,7 @@ const displayController = (() => {
 
     let resetButton = document.querySelector(".new-game");
     resetButton.addEventListener("click", () => {
+      winnerText.textContent = '';
       resetBoard();
       buttonListeners();
     });
@@ -44,7 +46,13 @@ const displayController = (() => {
     addToBoard(this, x, y);
     let winner = checkWinner(gameBoard.board);
     if (winner) {
-      console.log(winner);
+      if (winner === "X") {
+        winnerText.textContent = `${playerX.name} is the winner!`;
+      } else if (winner === "O") {
+        winnerText.textContent = `${playerO.name} is the winner!`;
+      } else {
+        winnerText.textContent = "Tie game!";
+      }
       disableBoard();
     }
   }
