@@ -21,9 +21,17 @@ const gameBoard = (() => {
 const displayController = (() => {
   const playerX = player("X", "Player 1");
   const playerO = player("O", "Player 2");
+  let nameMenu = document.querySelector(".name-menu");
+  let form = document.querySelector("#player-names");
   const winnerText = document.querySelector('.winner-text');
 
-  buttonListeners();
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    playerX.name = document.querySelector("#name-X").value;
+    playerO.name = document.querySelector("#name-O").value;
+    resetBoard();
+    buttonListeners();
+  });
 
   function buttonListeners() {
     const grid = document.querySelectorAll(".game-board-square");
