@@ -36,19 +36,29 @@ const displayController = (() => {
       buttonListeners();
     });
   }
-})();
 
-function logConsole(e) {
-  let xy = getXY(this);
-  x = xy[0];
-  y = xy[1];
-  addToBoard(this, x, y);
-  let winner = checkWinner(gameBoard.board);
-  if (winner) {
-    console.log(winner);
-    disableBoard();
+  function logConsole(e) {
+    let xy = getXY(this);
+    x = xy[0];
+    y = xy[1];
+    addToBoard(this, x, y);
+    let winner = checkWinner(gameBoard.board);
+    if (winner) {
+      console.log(winner);
+      disableBoard();
+    }
   }
-}
+
+  function disableBoard() {
+    // logic here to disable game board
+    for (let x = 0; x < gameBoard.elements.length; x++) {
+      for (let y = 0; y < gameBoard.elements[x].length; y++) {
+        let current = gameBoard.elements[x][y];
+        current.removeEventListener("click", logConsole);
+      }
+    }
+  }
+})();
 
 function getXY(item) {
   for (let x = 0; x < gameBoard.elements.length; x++) {
@@ -87,16 +97,6 @@ function addToBoard(current, x, y) {
     current.classList.add("select-O");
     gameBoard.board[x][y] = "O";
     gameBoard.turn = !gameBoard.turn;
-  }
-}
-
-function disableBoard() {
-  // logic here to disable game board
-  for (let x = 0; x < gameBoard.elements.length; x++) {
-    for (let y = 0; y < gameBoard.elements[x].length; y++) {
-      let current = gameBoard.elements[x][y];
-      current.removeEventListener("click", logConsole);
-    }
   }
 }
 
