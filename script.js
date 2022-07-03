@@ -23,7 +23,7 @@ const displayController = (() => {
   const playerO = player("O", "Player 2");
   let nameMenu = document.querySelector(".name-menu");
   let form = document.querySelector("#player-names");
-  const winnerText = document.querySelector('.winner-text');
+  const winnerText = document.querySelector(".winner-text");
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -41,7 +41,7 @@ const displayController = (() => {
 
     let resetButton = document.querySelector(".new-game");
     resetButton.addEventListener("click", () => {
-      winnerText.textContent = '';
+      winnerText.textContent = "";
       resetBoard();
       buttonListeners();
     });

@@ -1,5 +1,5 @@
 * {
-  box-sizing: border-box;
+  /* box-sizing: border-box; */
   padding: 0;
   margin: 0;
 }
@@ -7,19 +7,25 @@
 .game-board {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  align-items: center;
 }
 
 .game-board-row {
   display: flex;
   flex-direction: row;
-  gap: 10px;
 }
 
 .game-board-square {
   height: 150px;
   width: 150px;
-  outline: 1px solid black;
+}
+
+.game-board-row:not(:last-child) {
+  border-bottom: 8px solid black;
+}
+
+.game-board-row .game-board-square:not(:last-child) {
+  border-right: 8px solid black;
 }
 
 .select-X {
