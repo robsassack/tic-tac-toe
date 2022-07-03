@@ -4,27 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
     <title>Tic-Tac-Toe</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <h2>Tic-Tac-Toe</h2>
     <div class="name-menu">
+        <div class="winner-text"></div>
         <form id="player-names">
-            <div class="name-container">
-                <label for="name">X</label>
-                <input type="text" id="name-X" required>
-            </div>
-            <div class="name-container">
-                <label for="name">O</label>
-                <input type="text" id="name-O" required>
+            <div class="names-container">
+                <div class="name-field">
+                    <label for="name"><img src="img/game_X.svg"></label>
+                    <input type="text" id="name-X" required>
+                </div>
+                <div class="name-field">
+                    <label for="name"><img src="img/game_O.svg"></label>
+                    <input type="text" id="name-O" required>
+                </div>
             </div>
             <div class="submit-container">
                 <input type="submit" value="Start Game">
             </div>
         </form>
-        <div class="winner-text"></div>
     </div>
     <div class="game-board">
         <div class="game-board-row">
@@ -43,7 +46,6 @@
             <div class="game-board-square"></div>
         </div>
     </div>
-    <button class="new-game">Reset Game</button>
     <script src="script.js"></script>
 </body>
 

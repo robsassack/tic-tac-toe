@@ -1,10 +1,64 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap");
+
 * {
-  /* box-sizing: border-box; */
   padding: 0;
   margin: 0;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #f0f0f0;
+}
+
+h2 {
+  font-size: 3em;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.name-menu {
+  width: 300px;
+  padding: 10px 0;
+  outline: 2px solid rgb(70, 70, 70);
+  background-color: white;
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  top: 225px;
+}
+
+#player-names {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.names-container {
+  display: flex;
+  gap: 20px;
+}
+
+.names-container label {
+  display: block;
+  text-align: center;
+}
+
+.names-container input {
+  width: 125px;
+}
+
+.winner-text {
+  font-size: 2rem;
+  text-align: center;
+  padding-bottom: 10px;
 }
 
 .game-board {
+  padding-top: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,8 +70,8 @@
 }
 
 .game-board-square {
-  height: 150px;
-  width: 150px;
+  height: 125px;
+  width: 125px;
 }
 
 .game-board-row:not(:last-child) {

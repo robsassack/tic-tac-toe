@@ -29,6 +29,8 @@ const displayController = (() => {
     e.preventDefault();
     playerX.name = document.querySelector("#name-X").value;
     playerO.name = document.querySelector("#name-O").value;
+    winnerText.textContent = "";
+    nameMenu.style.display = "none";
     resetBoard();
     buttonListeners();
   });
@@ -37,13 +39,6 @@ const displayController = (() => {
     const grid = document.querySelectorAll(".game-board-square");
     grid.forEach((current) => {
       current.addEventListener("click", logConsole);
-    });
-
-    let resetButton = document.querySelector(".new-game");
-    resetButton.addEventListener("click", () => {
-      winnerText.textContent = "";
-      resetBoard();
-      buttonListeners();
     });
   }
 
@@ -54,10 +49,11 @@ const displayController = (() => {
     addToBoard(this, x, y);
     let winner = checkWinner(gameBoard.board);
     if (winner) {
+      nameMenu.style.display = "block";
       if (winner === "X") {
-        winnerText.textContent = `${playerX.name} is the winner!`;
+        winnerText.textContent = `${playerX.name} wins!`;
       } else if (winner === "O") {
-        winnerText.textContent = `${playerO.name} is the winner!`;
+        winnerText.textContent = `${playerO.name} wins!`;
       } else {
         winnerText.textContent = "Tie game!";
       }
